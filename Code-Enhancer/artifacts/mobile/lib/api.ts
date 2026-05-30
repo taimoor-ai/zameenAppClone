@@ -5,9 +5,9 @@ const TOKEN_KEY = "ghardhoondo_jwt";
 
 function getBaseUrl(): string {
   const domain = process.env.EXPO_PUBLIC_DOMAIN;
-  if (!domain) return "/api";
-  if (Platform.OS === "web") return "/api";
-  return `https://${domain}/api`;
+  // if (!domain) return "/api";
+  // if (Platform.OS === "web") return "/api";
+  return `http://localhost:5000/api`;
 }
 
 async function getToken(): Promise<string | null> {

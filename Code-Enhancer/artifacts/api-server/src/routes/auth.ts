@@ -26,6 +26,7 @@ const loginSchema = z.object({
 
 router.post("/auth/register", async (req, res) => {
   const parsed = registerSchema.safeParse(req.body);
+  console.log("Register attempt:", parsed);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid input", details: parsed.error.flatten() });
     return;
@@ -53,6 +54,8 @@ router.post("/auth/register", async (req, res) => {
 
 router.post("/auth/login", async (req, res) => {
   const parsed = loginSchema.safeParse(req.body);
+  console.log("login attempt:", parsed);
+
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid input" });
     return;

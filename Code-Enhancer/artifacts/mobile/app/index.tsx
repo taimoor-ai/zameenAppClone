@@ -1,7 +1,7 @@
 import { Redirect } from "expo-router";
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
-
+// import "dotenv/config";   // ← sabse pehli line
 import { useAuth } from "@/context/AuthContext";
 
 export default function IndexScreen() {

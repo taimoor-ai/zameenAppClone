@@ -31,6 +31,7 @@ export default function AdminDashboard() {
   const topPad = Platform.OS === "web" ? 67 : insets.top;
 
   const handleLogout = () => {
+    console.log("i am called")
     Alert.alert("Sign Out", "Exit admin panel?", [
       { text: "Cancel", style: "cancel" },
       {
