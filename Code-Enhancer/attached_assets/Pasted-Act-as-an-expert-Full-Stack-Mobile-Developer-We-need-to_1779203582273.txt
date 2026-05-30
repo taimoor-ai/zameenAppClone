@@ -1,0 +1,36 @@
+Act as an expert Full-Stack Mobile Developer. We need to update and fix the "GharDhoondo" Real Estate Expo React Native app (with Node.js/Express backend and Supabase/Firebase database). Optimize the code according to the following 6 modules:
+
+1. IMAGE UPLOADING & DISPLAY FIX
+- Issue: When a user posts a property with details, location, price, and images, the data saves, but images do not render on the listings screen.
+- Fix: Fix the image component routing. Ensure that uploaded property image URLs from the storage bucket are properly mapped, retrieved by the backend, and rendered inside the React Native Image components on the Home, Search, and Featured Listings screens so other users can see them.
+
+2. ADMIN DASHBOARD ROUTING & USER MANAGEMENT
+- Separate Admin Login: Create a dedicated toggle/option or secure route on the Authentication screen for Admin Login.
+- Credentials: Create a hardcoded or system check for Admin:
+  * Email: tehzeeb.x51214@gmail.com
+  * Password: 141161
+- Admin Panel Features: When logged in with these credentials, direct the user to an Admin Dashboard that displays:
+  * Users Directory: List of all registered users and their credentials.
+  * Transaction Records: Categorized logs showing comprehensive property details, tracking Buyer-Seller connections (who bought what from whom) and Renter-Owner connections (who rented what from whom).
+
+3. PROFILE SCREEN FUNCTIONALITY & EDIT PROFILE
+- Edit Profile: Make the "Edit Profile" button functional. Clicking it must open an Edit Profile screen/modal where the user can modify their details and change their Role using a clean selector (Buyer, Renter, Seller). Saving must update the database instantly.
+- List Functionality: Fully implement and connect all existing list items on the Profile page: "My Listings", "Notifications", "Privacy & Security", and "Help Center" so they navigate to their respective functional screens instead of being dead links.
+
+4. BUY VS RENT TOGGLE & ADVANCED HOME SEARCH
+- Tab Filtering: Fix the "Buy" and "Rent" toggle buttons on the Home screen.
+  * Clicking "Buy" must strictly filter and display only properties posted "For Sale".
+  * Clicking "Rent" must strictly filter and display only properties posted "For Rent".
+- Global Search Bar: Make the top search bar completely functional. It must dynamically filter the property array/database based on user queries for: City, Specific Area, or Property Type. If no matching properties exist, return a clean "No listings found matching your search" fallback UI.
+
+5. ADVANCED SEARCH SCREEN & FILTER MODAL (SCREENSHOTS 3 & 4)
+- Bottom Search Tab: Connect the bottom navigation Search tab to a dedicated search screen matching the filters workflow.
+- Buy/Rent Tabs: Include the strict Buy/Rent filtering toggle at the top of the search view.
+- Filter Modal Logic: Fully connect the Filter Modal options (City: Karachi, Lahore, Multan, Chakwal, etc.; Property Type: House, Apartment, Plot, Commercial, Farmhouse; Price Ranges).
+- Execution: When the user selects specific combinations and clicks "Show results", apply strict multi-conditional frontend/backend filters. Do not display extra records that fail the exact criteria.
+
+6. APP ICON & LAUNCH SPLASH SCREEN STYLING
+- App Icon: Set the application icon to a modern, crisp house outline symbol ("Home" theme) instead of the default placeholder layout.
+- Launch Loading Text: Update the app's splash/loading screen. Change the default white text reading "ghardhoondo" to a more premium, high-contrast color scheme (such as an emerald green or deep charcoal teal brand accent) that matches the real estate theme.
+
+Review the codebase, update the Express API routes, update the state managers in React Native, and ensure everything runs smoothly on Expo Go.

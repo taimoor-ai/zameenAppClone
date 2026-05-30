@@ -1,0 +1,30 @@
+Act as a Senior Database Administrator and Backend Engineer. We need to completely rebuild and structure the database schema and Express.js API endpoints for our "GharDhoondo" real estate application to support full scale Zameen.com-like features. 
+
+Implement the following PostgreSQL tables in Supabase and write the matching Express.js routing controllers:
+
+1. DATABASE SCHEMA SETUP (PostgreSQL / Supabase)
+Execute and create these exact relational tables with strict foreign key constraints:
+- 'users' Table:
+  * Fields: id (UUID, Primary Key), name, email (Unique), password_hash, phone, role (ENUM: 'buyer', 'seller', 'renter', 'admin' with default 'buyer'), profile_pic_url, created_at, updated_at.
+- 'properties' Table:
+  * Fields: id (UUID, Primary Key), seller_id (FK referencing users.id ON DELETE CASCADE), title, description, purpose (String: 'buy' or 'rent'), property_type (String: 'house', 'apartment', 'plot', 'commercial'), price (Decimal), area_size (e.g., '5 Marla'), bedrooms (Int), bathrooms (Int), city, address, latitude, longitude, status (String: 'available', 'sold', 'rented'), created_at, updated_at.
+- 'property_images' Table (One-to-Many):
+  * Fields: id (UUID, Primary Key), property_id (FK referencing properties.id ON DELETE CASCADE), image_url (Text), is_thumbnail (Boolean DEFAULT false), created_at.
+- 'transactions' Table (For Admin Panel Auditing):
+  * Fields: id (UUID, Primary Key), property_id (FK referencing properties.id ON DELETE SET NULL), party_first_id (FK referencing users.id - Owner/Seller), party_second_id (FK referencing users.id - Buyer/Tenant), transaction_type (String: 'sale' or 'rent_lease'), amount_transacted (Decimal), contract_start_date, contract_end_date, transacted_at.
+- 'saved_properties' Table:
+  * Fields: id (UUID, Primary Key), user_id (FK referencing users.id ON DELETE CASCADE), property_id (FK referencing properties.id ON DELETE CASCADE), saved_at. Set UNIQUE(user_id, property_id).
+
+2. BACKEND API ENDPOINTS INTEGRATION (Express.js)
+Create and update the following backend controllers to fetch this relational data cleanly:
+- GET /api/properties:
+  * Write a dynamic SQL query utilizing a LEFT JOIN between 'properties' and 'property_images'. 
+  * Use 'COALESCE(json_agg(pi.image_url) FILTER (WHERE pi.image_url IS NOT NULL), '[]')' to bundle all image URLs into a clean string array named 'images' inside each property object.
+  * Support strict query filters for: ?purpose=, ?city=, ?type=, ?minPrice=, and ?maxPrice=. Ensure filtering is conditional and matches exactly.
+- GET /api/admin/dashboard:
+  * Route must strictly verify admin access.
+  * Fetch and return two major lists:
+    1. Complete directory log of all users (id, name, email, role, created_at).
+    2. Comprehensive ledger tracking data from 'transactions' using SQL Joins to display: transaction_type, amount_transacted, property_title, party_first_name (Seller/Owner name), and party_second_name (Buyer/Renter name).
+
+Ensure all data models map perfectly, proper error responses are configured, and the environment variables sync seamlessly.
